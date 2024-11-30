@@ -2,7 +2,6 @@
 import { useFavorite } from '@/hooks/use-favorite';
 import { useWeatherQuery } from '@/hooks/use-weather';
 import { Loader2, X } from 'lucide-react';
-import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from './ui/button';
 import { ScrollArea } from './ui/scroll-area';
