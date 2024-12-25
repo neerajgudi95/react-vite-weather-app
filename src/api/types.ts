@@ -3,6 +3,11 @@ export interface Coordinates {
     lon: number;
 }
 
+export interface WeatherAIRequest {
+    location: string,
+    userQuery: string
+}
+
 export interface WeatherCondition {
     id: number;
     main: string;
@@ -60,3 +65,17 @@ export interface GeoCodingData {
     country: string;
     state?: string;
 }
+
+
+type WeatherResponse =
+    | {
+        type: "weather";
+        data: WeatherData;
+    }
+    | {
+        type: "forecast";
+        data: ForecastData;
+    } | null;
+
+
+export type { WeatherResponse };

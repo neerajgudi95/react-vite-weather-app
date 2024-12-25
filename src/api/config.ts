@@ -5,5 +5,5 @@ export const API_CONFIG = {
     DEFAULT_PARAMS: {
         units: 'metric',
         appid: import.meta.env.VITE_OPENWEATHER_API_KEY,
-    }
+    },
 }

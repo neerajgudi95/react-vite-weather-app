@@ -1,4 +1,4 @@
-import { Coordinates } from "@/api/types"
+import { Coordinates, WeatherAIRequest, WeatherResponse } from "@/api/types"
 import { weatherApi } from "@/api/weather"
 import { useQuery } from "@tanstack/react-query"
 
@@ -7,6 +7,7 @@ export const WEATHER_KEYS = {
     forecast: (coords: Coordinates) => ["forecast", coords] as const,
     geocode: (coords: Coordinates) => ["geocode", coords] as const,
     search: (query: string) => ["location-search", query] as const,
+    weatherAi: (weatherAi: WeatherAIRequest) => ["weather-ai", weatherAi] as const,
 } as const
 
 export function useWeatherQuery(coordinates: Coordinates | null) {
@@ -35,5 +36,13 @@ export function useSearchLocation(query: string) {
         queryKey: WEATHER_KEYS.search(query),
         queryFn: () => weatherApi.searchLocations(query),
         enabled: query.length >= 3
+    })
+}
+
+export function useWeatherAI({ location, userQuery }: WeatherAIRequest) {
+    return useQuery<WeatherResponse, Error>({
+        queryKey: WEATHER_KEYS.weatherAi({ location, userQuery }),
+        queryFn: () => weatherApi.geminiWeather({ location, userQuery }),
+        enabled: false
     })
 }
